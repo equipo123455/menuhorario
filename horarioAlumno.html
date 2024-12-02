@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: start;
+            gap: 20px;
+        }
+
+        .sep-logo {
+            width: 180px;
+            height: auto;
+        }
+
+        .sems-logo {
+            width: 200px;
+            height: auto;
+            background-position: center;
+        }
+
+        .right-logo {
+            width: 110px;
+            height: auto;
+        }
+
+        .school-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            border: 1px solid #000;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 10px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .info-value {
+            border-bottom: 1px solid #000;
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #000;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        textarea {
+            resize: none;
+            height: 30px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+        }
+
+        .director-signature {
+            text-align: center;
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            margin: 0 auto;
+            width: 200px;
+        }
+
+        .footer-image {
+            width: 200px;
+            height: auto;
+        }
+
+        .school-title {
+            text-align: center;
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.2;
+        }
+
+        .motto {
+            font-style: italic;
+            font-size: 10px;
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        #saveButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        #saveButton.active {
+            cursor: pointer;
+            opacity: 1;
+            background-color: #45a049;
+        }
+
+        #saveButton:hover.active {
+            background-color: #4CAF50;
+        }
+
+        #successMessage {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-left">
+            <img src="educacion.jpeg" alt="SEP Logo" class="sep-logo">
+            <div>
+                <p style="font-size: 10px; margin: 0;">SECRETARIA DE EDUCACIÓN PÚBLICA</p>
+                <p style="font-size: 10px; margin: 0;">SUBSECRETARÍA DE EDUCACIÓN MEDIA SUPERIOR</p>
+                <p style="font-size: 10px; margin: 0;">DIRECCIÓN GENERAL DE EDUCACIÓN TECNOLÓGICA INDUSTRIAL Y DE SERVICIOS</p>
+            </div>
+        </div>
+        <img src="logo_sems.jpg" alt="SEMS Logo" class="sems-logo">
+        <img src="images.png" alt="Right Logo" class="right-logo">
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h4 class="school-title">CENTRO DE BACHILLERATO TECNOLÓGICO industrial y de servicios No. 205</h4>
+        <h4 class="school-title">"JOSÉ VASCONCELOS"</h4>
+        <p class="motto">"2024, Año de Francisco Villa, el Revolucionario del Pueblo"</p>
+    </div>
+    <div class="school-info">
+        <div class="info-item">
+            <span class="info-label">ESPECIALIDAD</span>
+            <input type="text" class="info-value" id="especialidad">
+        </div>
+        <div class="info-item">
+            <span class="info-label">TURNO</span>
+            <input type="text" class="info-value" id="turno">
+        </div>
+        <div class="info-item">
+            <span class="info-label">SEMESTRE</span>
+            <input type="text" class="info-value" id="semestre">
+        </div>
+        <div class="info-item">
+            <span class="info-label">GRUPO</span>
+            <input type="text" class="info-value" id="grupo">
+        </div>
+        <div class="info-item">
+            <span class="info-label">AULA</span>
+            <input type="text" class="info-value" id="aula">
+        </div>
+    </div>
+    <table id="materiaTable">
+        <tr>
+            <th>MATERIA/ASIGNATURA</th>
+            <th>HORAS</th>
+            <th>DOCENTES</th>
+        </tr>
+        <tr>
+            <td><textarea class="materiaInput"></textarea></td>
+            <td><textarea class="horasInput"></textarea></td>
+            <td><textarea class="docenteInput"></textarea></td>
+        </tr>
+        <tr>
+            <td><textarea class="materiaInput"></textarea></td>
+            <td><textarea class="horasInput"></textarea></td>
+            <td><textarea class="docenteInput"></textarea></td>
+        </tr>
+        <tr>
+            <td><textarea class="materiaInput"></textarea></td>
+            <td><textarea class="horasInput"></textarea></td>
+            <td><textarea class="docenteInput"></textarea></td>
+        </tr>
+        <tr>
+            <td><textarea class="materiaInput"></textarea></td>
+            <td><textarea class="horasInput"></textarea></td>
+            <td><textarea class="docenteInput"></textarea></td>
+        </tr>
+        <tr>
+            <td><textarea class="materiaInput"></textarea></td>
+            <td><textarea class="horasInput"></textarea></td>
+            <td><textarea class="docenteInput"></textarea></td>
+        </tr>
+        <tr>
+            <td><textarea class="materiaInput"></textarea></td>
+            <td><textarea class="horasInput"></textarea></td>
+            <td><textarea class="docenteInput"></textarea></td>
+        </tr>
+        <tr>
+            <td><textarea class="materiaInput"></textarea></td>
+            <td><textarea class="horasInput"></textarea></td>
+            <td><textarea class="docenteInput"></textarea></td>
+        </tr>
+        <tr>
+            <td><textarea class="materiaInput"></textarea></td>
+            <td><textarea class="horasInput"></textarea></td>
+            <td><textarea class="docenteInput"></textarea></td>
+        </tr>
+    </table>
+    <table id="horarioTable">
+        <tr>
+            <th>HORA</th>
+            <th>LUNES</th>
+            <th>MARTES</th>
+            <th>MIÉRCOLES</th>
+            <th>JUEVES</th>
+            <th>VIERNES</th>
+        </tr>
+        <tr>
+            <td class="time-slot">07:00 07:50</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+        <tr>
+            <td class="time-slot">07:50 08:40</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+        <tr>
+            <td class="time-slot">08:40 09:30</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+        <tr>
+            <td class="time-slot">09:30 10:20</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+        <tr>
+            <td class="time-slot">10:20 10:50</td>
+            <td>RECESO</td>
+            <td>RECESO</td>
+            <td>RECESO</td>
+            <td>RECESO</td>
+            <td>RECESO</td>
+        </tr>
+        <tr>
+            <td class="time-slot">10:50 11:40</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+        <tr>
+            <td class="time-slot">11:40 12:30</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+        <tr>
+            <td class="time-slot">12:30 13:20</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+        <tr>
+            <td class="time-slot">13:20 14:10</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+        <tr>
+            <td class="time-slot">14:10 15:00</td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+            <td><textarea class="scheduleInput"></textarea></td>
+        </tr>
+    </table>
+    <button id="saveButton" disabled>Guardar Horario</button>
+    <div id="successMessage">¡Horario guardado exitosamente!</div>
+    <div class="footer">
+        <div class="footer-text">
+            <p style="margin: 0;">CICLO ESCOLAR: AGOSTO 2024 - JULIO 2025</p>
+            <p style="margin: 0;">SEMESTRE ESCOLAR: AGOSTO 2024 - ENERO 2025</p>
+        </div>
+        <div style="text-align: center;">
+            <p style="font-size: 10px; margin: 5px 0;">Heroica Ciudad Juchitán de Zaragoza, Oax., a 26 de Agosto de 2024</p>
+            <div class="director-signature">
+                <p style="margin: 5px 0;">CARLOS HERNÁNDEZ TORRES</p>
+                <p style="margin: 5px 0;">DIRECTOR</p>
+            </div>
+        </div>
+        <img src="felipe.jpg" alt="Footer Image" class="footer-image">
+    </div>
+
+    <script>
+        // Function to check if all inputs are filled
+        function checkAllInputsFilled() {
+            // Check info inputs
+            const infoInputs = document.querySelectorAll('.info-value');
+            const infoInputsFilled = Array.from(infoInputs).every(input => input.value.trim() !== '');
+
+            // Check materia table inputs
+            const materiaInputs = document.querySelectorAll('.materiaInput, .horasInput, .docenteInput');
+            const materiaInputsFilled = Array.from(materiaInputs).every(input => input.value.trim() !== '');
+
+            // Check schedule inputs (excluding RECESO rows)
+            const scheduleInputs = document.querySelectorAll('.scheduleInput');
+            const scheduleInputsFilled = Array.from(scheduleInputs).every(input => input.value.trim() !== '');
+
+            // Enable/disable save button
+            const saveButton = document.getElementById('saveButton');
+            if (infoInputsFilled && materiaInputsFilled && scheduleInputsFilled) {
+                saveButton.disabled = false;
+                saveButton.classList.add('active');
+            } else {
+                saveButton.disabled = true;
+                saveButton.classList.remove('active');
+            }
+        }
+
+        // Function to collect all form data
+        function collectScheduleData() {
+            // Collect info data
+            const infoData = {
+                especialidad: document.getElementById('especialidad').value,
+                turno: document.getElementById('turno').value,
+                semestre: document.getElementById('semestre').value,
+                grupo: document.getElementById('grupo').value,
+                aula: document.getElementById('aula').value
+            };
+
+            // Collect materia data
+            const materiaData = [];
+            const materiaRows = document.querySelectorAll('#materiaTable tr:not(:first-child)');
+            materiaRows.forEach(row => {
+                const materia = row.querySelector('.materiaInput').value;
+                const horas = row.querySelector('.horasInput').value;
+                const docente = row.querySelector('.docenteInput').value;
+                
+                if (materia.trim() || horas.trim() || docente.trim()) {
+                    materiaData.push({ materia, horas, docente });
+                }
+            });
+
+            // Collect schedule data
+            const scheduleData = [];
+            const scheduleRows = document.querySelectorAll('#horarioTable tr:not(:first-child)');
+            scheduleRows.forEach(row => {
+                const timeSlot = row.querySelector('.time-slot')?.textContent || 'RECESO';
+                
+                if (timeSlot !== 'RECESO') {
+                    const scheduleEntry = {
+                        timeSlot: timeSlot,
+                        lunes: row.querySelectorAll('.scheduleInput')[0].value,
+                        martes: row.querySelectorAll('.scheduleInput')[1].value,
+                        miercoles: row.querySelectorAll('.scheduleInput')[2].value,
+                        jueves: row.querySelectorAll('.scheduleInput')[3].value,
+                        viernes: row.querySelectorAll('.scheduleInput')[4].value
+                    };
+                    scheduleData.push(scheduleEntry);
+                }
+            });
+
+            return {
+                infoData,
+                materiaData,
+                scheduleData
+            };
+        }
+
+        // Save function 
+        function saveSchedule() {
+            // Collect all form data
+            const scheduleData = collectScheduleData();
+
+            // In a real application, you would send this data to a server
+            // For now, we'll just log it and show success message
+            console.log('Horario guardado:', scheduleData);
+
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+
+            // Optional: Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        }
+
+        // Add event listeners when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add input listeners to check when all fields are filled
+            const allInputs = document.querySelectorAll('.info-value, textarea');
+            allInputs.forEach(input => {
+                input.addEventListener('input', checkAllInputsFilled);
+            });
+
+            // Add click listener to save button
+            const saveButton = document.getElementById('saveButton');
+            saveButton.addEventListener('click', saveSchedule);
+        });
+    </script>
+</body>
+</html>

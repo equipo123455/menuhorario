@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Horarios Escuela</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ece6df, #b8e5b3);
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            max-width: 1300px;
+            background-color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .text {
+            flex: 1;
+            padding: 60px;
+            color: #333;
+        }
+
+        .text h1 {
+            font-size: 70px;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        .text p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: #555;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .buttons button {
+            background-color:#92ea89;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #b0efff;
+            transform: translateY(-2px);
+        }
+
+        .buttons button a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        .school-image {
+            flex: 1;
+            max-width: 600px;
+            overflow: hidden;
+        }
+
+        .school-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .school-image img:hover {
+            transform: scale(1.1);
+        }
+
+        .link {
+            text-decoration: none;
+            color: white;
+        }
+
+        .link:hover {
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text">
+            <h1>Control De Horarios</h1>
+            <p> </p>
+            <div class="buttons">
+                <button><a class="link" href="login.html">Iniciar sesión</a></button>
+                <button id="moreInfoButton"><a class="link" href="masinfo.html">Más Información</a></button>
+            </div>
+        </div>
+        <div class="school-image">
+            <img src="C:\Users\Mario\Documents\tarea tino\logo3.png" alt="logotipo de la dgeti">
+        </div>
+    </div>
+</body>
+</html>

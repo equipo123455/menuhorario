@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Horario Docente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input, textarea {
+            width: 100%;
+            border: none;
+            background-color: transparent;
+        }
+        header {
+            background-color: #9feda2;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        h1, h2 {
+            margin: 0;
+        }
+        p {
+            margin: 5px 0;
+        }
+        ul {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Educación</h1>
+        <p>Subsecretaria de Educación Media Superior</p>
+        <p>Dirección General de Educación Tecnológica Industrial y de Servicios No. 205</p>
+        <p>Ciclo Escolar Agosto 2023 - Julio 2024</p>
+    </header>
+
+    <h2>Horario Docente</h2>
+
+    <table>
+        <tr>
+            <th>NOMBRE:</th>
+            <td><input type="text"></td>
+            <th>RFC:</th>
+            <td><input type="text"></td>
+            <th>CURP:</th>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <th>CLAVE (S):</th>
+            <td><input type="text"></td>
+            <th>HORAS NOMBRAMIENTO:</th>
+            <td><input type="text"></td>
+            <th>GRADO</th>
+            <td><input type="text"></td>
+            <th>GRUPO</th>
+            <td><input type="text"></td>
+            <th>AULA</th>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <th>TIPO DE NOMBRAMIENTO:</th>
+            <td><input type="text" value="20"></td>
+            <td><input type="text" value="95 L"></td>
+            <td><input type="text" value="95 I"></td>
+            <td><input type="text" value="10"></td>
+        </tr>
+        <tr>
+            <th>CLAVE (S):</th>
+            <td><input type="text"></td>
+            <th>COMPONENTE (S):</th>
+            <td>BÁSICO</td>
+            <td>X</td>
+            <td>PROPEDÉUTICO</td>
+            <td><input type="text"></td>
+            <td><input type="text" value="PROFESIONAL"></td>
+            <td><input type="text"></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>HORA</th>
+            <th>LUNES</th>
+            <th>MARTES</th>
+            <th>MIÉRCOLES</th>
+            <th>JUEVES</th>
+            <th>VIERNES</th>
+        </tr>
+        <tr>
+            <td>07:00 - 07:50</td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>07:50 - 08:40</td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>08:40 - 09:30</td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>09:30 - 10:20</td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+        </tr>
+        <!-- Rest of the time slots continue with the same pattern -->
+        <tr>
+            <td>10:20 - 10:50</td>
+            <td>RECESO</td>
+            <td>RECESO</td>
+            <td>RECESO</td>
+            <td>RECESO</td>
+            <td>RECESO</td>
+        </tr>
+        <tr>
+          <td>10:50 - 11:40</td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+      </tr> <tr>
+        <td>11:40 - 12:30</td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+    </tr> <tr>
+      <td>12:30 - 13:10</td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+  </tr> <tr>
+    <td>13:20 - 14:10</td>
+    <td><input type="text"></td>
+    <td><input type="text"></td>
+    <td><input type="text"></td>
+    <td><input type="text"></td>
+    <td><input type="text"></td>
+</tr> <tr>
+  <td>14:10 - 15:00</td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+</tr> <tr>
+  <td>15:00 - 15:50</td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+</tr> <tr>
+  <td>15:50 - 16:20</td>
+  <td>RECESO</td>
+  <td>RECESO</td>
+  <td>RECESO</td>
+  <td>RECESO</td>
+  <td>RECESO</td>
+</tr> <tr>
+  <td>16:20 - 17:10</td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+</tr>
+<tr>
+  <td>17:10 - 18:00</td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+</tr>
+<tr>
+  <td>18:00 - 18:50</td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+</tr>
+<tr>
+  <td>18:50 - 19:40</td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+  <td><input type="text"></td>
+</tr>
+    </table>
+
+    <p>(*) Actividades Complementarias:</p>
+    <ul>
+        <li>Brinda Asesoría a alumnos con problemas de aprendizaje - 5 hrs.</li>
+        <li>Brinda Asesoría Académica a alumnos sobresaliente - 5hrs.</li>
+    </ul>
+
+    <p>Heroica Ciudad Juchitán de Zaragoza, Oax., a 28 de Agosto de 2023.</p>
+    <p>ATENTAMENTE</p>
+    <p>CARLOS HERNANDEZ TORRES</p>
+    <p>DIRECTOR</p>
+</body>
+</html>

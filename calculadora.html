@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Científica</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            padding: 20px;
+        }
+
+        .display {
+            background: #333;
+            color: #fff;
+            font-size: 2em;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .keys button {
+            background: #007bff;
+            border: none;
+            color: #fff;
+            font-size: 1.5em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .keys button:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .keys .operator {
+            background: #ff5722;
+        }
+
+        .keys .operator:hover {
+            background: #e64a19;
+        }
+
+        .keys .equals {
+            grid-column: span 2;
+            background: #4caf50;
+        }
+
+        .keys .equals:hover {
+            background: #388e3c;
+        }
+
+        .keys .clear {
+            background: #f44336;
+        }
+
+        .keys .clear:hover {
+            background: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="keys">
+            <button class="operator" onclick="inputKey('/')">÷</button>
+            <button class="operator" onclick="inputKey('*')">×</button>
+            <button class="operator" onclick="inputKey('-')">−</button>
+            <button class="operator" onclick="inputKey('+')">+</button>
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button onclick="inputKey('7')">7</button>
+            <button onclick="inputKey('8')">8</button>
+            <button onclick="inputKey('9')">9</button>
+            <button class="operator" onclick="inputKey('(')">(</button>
+            <button class="operator" onclick="inputKey(')')">)</button>
+            <button onclick="inputKey('4')">4</button>
+            <button onclick="inputKey('5')">5</button>
+            <button onclick="inputKey('6')">6</button>
+            <button class="operator" onclick="inputKey('^')">^</button>
+            <button class="operator" onclick="inputKey('sqrt(')">√</button>
+            <button onclick="inputKey('1')">1</button>
+            <button onclick="inputKey('2')">2</button>
+            <button onclick="inputKey('3')">3</button>
+            <button class="operator" onclick="inputKey('log(')">log</button>
+            <button class="operator" onclick="inputKey('ln(')">ln</button>
+            <button onclick="inputKey('0')">0</button>
+            <button onclick="inputKey('.')">.</button>
+            <button class="equals" onclick="calculate()">=</button>
+            <button class="operator" onclick="inputKey('sin(')">sin</button>
+            <button class="operator" onclick="inputKey('cos(')">cos</button>
+            <button class="operator" onclick="inputKey('tan(')">tan</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function inputKey(key) {
+            if (display.innerText === '0') {
+                display.innerText = key;
+            } else {
+                display.innerText += key;
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = '0';
+        }
+
+        function calculate() {
+            try {
+                let result = eval(display.innerText
+                    .replace(/÷/g, '/')
+                    .replace(/×/g, '*')
+                    .replace(/−/g, '-')
+                    .replace(/√/g, 'Math.sqrt')
+                    .replace(/log/g, 'Math.log10')
+                    .replace(/ln/g, 'Math.log')
+                    .replace(/sin/g, 'Math.sin')
+                    .replace(/cos/g, 'Math.cos')
+                    .replace(/tan/g, 'Math.tan')
+                    .replace(/\^/g, '**')
+                );
+                display.innerText = result;
+            } catch (error) {
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>

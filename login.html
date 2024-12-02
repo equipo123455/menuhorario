@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con CAPTCHA</title>
+    <style>
+        /* Previous CSS styles remain the same */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, #006341 20%, #a8d5ba 100%);
+            color: white;
+            padding: 10px;
+        }
+
+        .header img {
+            position: absolute;
+            top: 10px;
+            width: 200px;
+            height: 88px;
+            max-width: 100%;
+        }
+
+        .header .left-logo {
+            left: 10px;
+        }
+
+        .header .right-logo {
+            right: 10px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            margin: 0;
+            padding: 0 10px;
+        }
+
+        .form-title-container {
+            background: linear-gradient(to bottom, #006341 20%, #a8d5ba 100%);
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-bottom: 5px solid #006341;
+            color: white;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .container {
+            margin-top: 20px;
+            width: 90%;
+            max-width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-color: white;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .captcha-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .captcha-image {
+            width: 60%;
+            height: 40px;
+            background-color: #f0f0f0;
+            text-align: center;
+            line-height: 40px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 24px;
+            letter-spacing: 3px;
+            border: 1px solid #ccc;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .refresh-captcha, .submit-btn {
+            background-color: #006341;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .refresh-captcha:hover, .submit-btn:hover {
+            background-color: #004d2e;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+
+            .header img {
+                width: 40px;
+            }
+
+            .form-title {
+                font-size: 20px;
+            }
+
+            .refresh-captcha, .submit-btn {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="captcha-form" method="POST">
+    <div class="header">
+        <img src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photo/18230349/image/medium-bcdb24133392b6e8a47d5bcd634f7140.png" class="left-logo" alt="Logo de la SEP">
+        <img src="http://cbtis146.edu.mx/wp-content/uploads/2021/08/SISEEMS.png" class="right-logo" alt="Logo SISEEMS">
+        <h1>SECRETARIA DE EDUCACIÓN PUBLICA<br>SUBSECRETARIA DE EDUCACIÓN MEDIA SUPERIOR</h1>
+    </div>
+    <div class="form-title-container">
+        <div class="form-title">Acceso al Sistema:</div>
+    </div>
+    <div class="container">
+        <div class="error-message" id="error-message">CAPTCHA incorrecto. Por favor, inténtelo de nuevo.</div>
+        <div class="form-group">
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <input type="hidden" id="captcha-code" name="captcha-code">
+
+        <div class="captcha-container">
+            <canvas id="captcha-image" class="captcha-image"></canvas>
+            <button type="button" class="refresh-captcha" onclick="generateCaptcha()">Regenerar</button>
+        </div>
+        <div class="form-group">
+            <label for="captcha">Ingrese el CAPTCHA</label>
+            <input type="text" id="captcha" name="captcha" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Entrar</button>
+        </div>
+    </div>
+    <script>
+        let captchaCode;
+
+        function generateCaptcha() {
+            const canvas = document.getElementById('captcha-image');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 150;
+            canvas.height = 40;
+
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            captchaCode = '';
+            for (let i = 0; i < 6; i++) {
+                captchaCode += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+
+            // Background
+            ctx.fillStyle = '#f0f0f0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Distraction lines
+            for (let i = 0; i < 10; i++) {
+                ctx.strokeStyle = `rgba(0, 0, 0, ${Math.random()})`;
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.stroke();
+            }
+
+            // Distraction circles
+            for (let i = 0; i < 20; i++) {
+                ctx.fillStyle = `rgba(0, 0, 0, ${Math.random()})`;
+                ctx.beginPath();
+                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // CAPTCHA text with distortion
+            ctx.font = '24px "Courier New", Courier, monospace';
+            for (let i = 0; i < captchaCode.length; i++) {
+                const x = 25 * i + 10;
+                const y = 30;
+                const angle = Math.random() * 0.4 - 0.2;
+                const color = `rgb(${Math.floor(Math.random() * 150)}, ${Math.floor(Math.random() * 150)}, ${Math.floor(Math.random() * 150)})`;
+                ctx.fillStyle = color;
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(angle);
+                ctx.fillText(captchaCode[i], 0, 0);
+                ctx.restore();
+            }
+
+            // Additional dots
+            for (let i = 0; i < 50; i++) {
+                ctx.fillStyle = `rgba(0, 0, 0, ${Math.random()})`;
+                ctx.beginPath();
+                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 1, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Update hidden input with CAPTCHA code
+            document.getElementById('captcha-code').value = captchaCode;
+        }
+
+        // Form submission handler
+        document.getElementById('captcha-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get entered CAPTCHA and stored CAPTCHA
+            const enteredCaptcha = document.getElementById('captcha').value;
+            const storedCaptcha = document.getElementById('captcha-code').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Validate CAPTCHA
+            if (enteredCaptcha.toLowerCase() === storedCaptcha.toLowerCase()) {
+                // CAPTCHA is correct, redirect to another page
+                window.location.href = "principal.html"; // Replace with your desired redirect page
+            } else {
+                // CAPTCHA is incorrect
+                errorMessage.style.display = 'block';
+                generateCaptcha(); // Regenerate CAPTCHA
+                document.getElementById('captcha').value = ''; // Clear CAPTCHA input
+            }
+        });
+
+        window.onload = function () {
+            generateCaptcha();
+        };
+    </script>
+    </form>
+</body>
+</html>
